@@ -3,6 +3,7 @@ using api.src.data;
 using api.src.helpers;
 using api.src.interfaces;
 using api.src.models;
+using api.src.repositories;
 using api.src.services;
 using CloudinaryDotNet;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -33,6 +34,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddScoped<ItokenService, TokenService>();
+builder.Services.AddScoped<IPostInterface, PostRespository>();
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(
     opt => {
