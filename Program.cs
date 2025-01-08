@@ -1,8 +1,10 @@
 using System.Text;
 using api.src.data;
+using api.src.helpers;
 using api.src.interfaces;
 using api.src.models;
 using api.src.services;
+using CloudinaryDotNet;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +17,15 @@ builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlite("Data Source=users.db");
 });
+
+var CloudinarySettings = builder.Configuration.GetSection("CloudinarySettings").Get<CloudinarySettings>();
+var CloudinaryAccount = new Account(
+    CloudinarySettings!.CloudName,
+    CloudinarySettings.ApiKey,
+    CloudinarySettings.ApiSecret
+);
+var Cloudinary = new Cloudinary(CloudinaryAccount);
+builder.Services.AddSingleton(Cloudinary);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -89,6 +100,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
 
 using (var scope = app.Services.CreateScope())
