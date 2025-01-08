@@ -23,7 +23,7 @@ namespace api.src.services
         {
             _userManager = userManager;
 
-            var signingKey = Environment.GetEnvironmentVariable("EstaEsUnaClaveDeFirmaSuficientementeLargaQueSuperaLos64Bytes1234567890") ?? throw new ArgumentNullException("Signing key cannot be null or empty.");
+            var signingKey = "EstaEsUnaClaveDeFirmaSuficientementeLargaQueSuperaLos64Bytes1234567890";
 
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signingKey));
         }
@@ -47,9 +47,9 @@ namespace api.src.services
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
             
-            var issuer = Environment.GetEnvironmentVariable("http://localhost:5000") ?? throw new ArgumentNullException("JWT Issuer cannot be null or empty.");;
+            var issuer = "http://localhost:5000" ?? throw new ArgumentNullException("JWT Issuer cannot be null or empty.");;
 
-            var audience = Environment.GetEnvironmentVariable("http://localhost:5000") ?? throw new ArgumentNullException("JWT Audience cannot be null or empty.");
+            var audience = "http://localhost:5000" ?? throw new ArgumentNullException("JWT Audience cannot be null or empty.");
             
             var tokenDescriptor = new SecurityTokenDescriptor
             {

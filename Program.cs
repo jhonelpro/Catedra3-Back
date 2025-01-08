@@ -1,6 +1,8 @@
 using System.Text;
 using api.src.data;
+using api.src.interfaces;
 using api.src.models;
+using api.src.services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +21,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+builder.Services.AddScoped<ItokenService, TokenService>();
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(
     opt => {
@@ -26,7 +29,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(
         opt.Password.RequireLowercase = false;
         opt.Password.RequireUppercase = false;
         opt.Password.RequireNonAlphanumeric = false;
-        opt.Password.RequiredLength = 8;
+        opt.Password.RequiredLength = 6;
     }
 ).AddEntityFrameworkStores<DataContext>();
 

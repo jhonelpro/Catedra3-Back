@@ -11,7 +11,7 @@ using api.src.data;
 namespace api.src.data.migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250108010016_firstMigration")]
+    [Migration("20250108015121_firstMigration")]
     partial class firstMigration
     {
         /// <inheritdoc />
@@ -44,6 +44,14 @@ namespace api.src.data.migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "ddce477b-a615-4a6b-a9e8-0ca455107590",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

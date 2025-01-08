@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 using api.src.models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace api.src.data
 {
@@ -18,5 +19,13 @@ namespace api.src.data
         public DbSet<Post> Posts { get; set; } = null!;
         public DbSet<AppUser> AppUsers { get; set; } = null!;
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new IdentityRole { Name = "User", NormalizedName = "USER" }
+            );
+        }
     }
 }
