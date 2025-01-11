@@ -13,7 +13,7 @@ namespace api.src.dtos
         public string? Email { get; set; } = string.Empty;
 
         [Required]
-        [StringLength(6, MinimumLength = 1, ErrorMessage = "La contraseña debe tener entre 1 y 6 caracteres.")]
+        [StringLength(100, MinimumLength = 6 , ErrorMessage = "La contraseña debe tener entre 6 y 100 caracteres.")]
         [RegularExpression(@"^(?=.*\d).+$", ErrorMessage = "La contraseña debe tener al menos un número.")]
         public string? Password { get; set; } = string.Empty;
     }

@@ -13,7 +13,9 @@ namespace api.src.dtos
         [Required]
         [MinLength(5, ErrorMessage = "El título debe tener al menos 5 caracteres.")]
         public string Title { get; set; } = string.Empty;
+        [Required]
         public DateOnly Publication_date { get; set; }
+        [Required]
         public IFormFile Image { get; set; } = null!;
     }
 }

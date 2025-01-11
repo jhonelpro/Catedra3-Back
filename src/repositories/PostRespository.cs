@@ -18,7 +18,7 @@ namespace api.src.repositories
 
         private readonly DataContext _context;
 
-        public PostRespository(DataContext context, UserManager<AppUser> userManager)
+        public PostRespository(DataContext context)
         {
             _context = context;
         }
@@ -49,8 +49,17 @@ namespace api.src.repositories
 
         public async Task<IActionResult> GetPostAsync()
         {
-            var posts = await _context.Posts.ToListAsync();
-            return new OkObjectResult(posts);
+            var posts = await _context.Posts.Include(u => u.Author).ToListAsync();
+
+            var postDto = posts.Select(post => new PostDto
+            {
+                Title = post.Title,
+                Publication_date = post.Publication_date,
+                ImageUrl = post.ImageUrl,
+                Author = post.Author?.UserName ?? "Unknown",
+            });
+
+            return new OkObjectResult(postDto);
         }
     }
 }

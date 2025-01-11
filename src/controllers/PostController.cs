@@ -37,9 +37,9 @@ namespace api.src.controllers
 
             try
             {
-                if (newPost.Image.ContentType != "image/jpeg" && newPost.Image.ContentType != "image/png")
+                if (newPost.Image.ContentType != "image/jpg" && newPost.Image.ContentType != "image/png")
                 {
-                    return BadRequest( new { message = "La imagen debe ser un archivo jpeg o png"});
+                    return BadRequest( new { message = "La imagen debe ser un archivo jpg o png"});
                 }
 
                 if (newPost.Image.Length > 5 * 1024 * 1024)
